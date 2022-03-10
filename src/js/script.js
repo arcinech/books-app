@@ -6,12 +6,13 @@
     },
     containerOf: {
       bookList: '.books-list',
+      book: '.book',
     },
     innerBook: {
-        header: '.book__header',
-        basePrising: '.product__base-price',
-        bookImage: '.book_image',
-        bookRating: '.book__rating',
+      header: '.book__header',
+      basePrising: '.product__base-price',
+      bookImage: '.book_image',
+      bookRating: '.book__rating',
     },
   };
 
