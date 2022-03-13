@@ -49,15 +49,6 @@
       
       bookContainer.appendChild(thisBook.element);
     }
-
-    hideBook(){
-      const thisBook = this;
-      thisBook.dom.image.classList.add('hidden');
-    }
-    showBook(){
-      const thisBook = this;
-      thisBook.dom.image.classList.remove('hidden');
-    }
     
   }
 
