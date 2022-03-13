@@ -28,7 +28,7 @@
   const filters = []; 
 
   const templates = {
-    bookList: Handlebars.compile(document.querySelector(select.templateOf.bookTemplate).innerHTML)
+    bookList: Handlebars.compile(document.querySelector(select.templateOf.bookTemplate).innerHTML),
   };
 
 
@@ -43,11 +43,28 @@
 
     renderBooks(){
       const thisBook = this;
-      const generatedHTML = templates.bookList(thisBook.data);
-      thisBook.element = utils.createDOMFromHTML(generatedHTML);
-      const bookContainer = document.querySelector(select.containerOf.bookList);
       
+      const changedData = thisBook.data;
+      const ratingWidth = thisBook.data.rating * 10;
+      const ratingBgc = thisBook.calculateRatingBgc();
+      // add two new keys to book data memory
+      changedData.ratingWidth = ratingWidth;
+      changedData.ratingBgc = ratingBgc;
+
+      const generatedHTML = templates.bookList(changedData);
+      thisBook.element = utils.createDOMFromHTML(generatedHTML);
+
+      const bookContainer = document.querySelector(select.containerOf.bookList);
       bookContainer.appendChild(thisBook.element);
+    }
+
+    calculateRatingBgc(){
+      const thisBook = this;
+
+      if(thisBook.data.rating < 6) return 'linear-gradient(to bottom,  #fefcea 0%, #f1da36 100%)';
+      else if(thisBook.data.rating <= 8) return 'linear-gradient(to bottom, #b4df5b 0%,#b4df5b 100%)';
+      else if(thisBook.data.rating <= 9) return 'linear-gradient(to bottom, #299a0b 0%, #299a0b 100%)';
+      else return 'linear-gradient(to bottom, #ff0084 0%,#ff0084 100%)';
     }
     
   }
