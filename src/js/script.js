@@ -136,5 +136,17 @@
   }
 
 
-  const app = new BookList();
+  const app = {
+    initBooks: function(){
+      new BookList();
+    },
+
+    init: function(){
+      const thisApp = this;
+
+      thisApp.initBooks();
+    },
+  };
+
+  app.init();
 }
