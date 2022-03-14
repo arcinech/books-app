@@ -32,7 +32,7 @@
   };
 
 
-
+/*
   class Book{
     constructor(data){
       const thisBook = this;
@@ -68,7 +68,7 @@
     }
     
   }
-
+*/
   class BookList{
     constructor(){
 
@@ -116,30 +116,34 @@
     }
 
     initActions(){
-      this.dom.bookList.addEventListener('dblclick', function(event){
-        const clickedImage = event.target.offsetParent;
-
-        if(clickedImage.classList.contains(names.bookImage)){
-          const id = clickedImage.getAttribute(names.dataId);
-          if(clickedImage.classList.contains(names.favorite)){
-            clickedImage.classList.remove(names.favorite);
-            favoriteBooks.splice(favoriteBooks.indexOf(id), 1);
-          } else {
-            clickedImage.classList.add(names.favorite);
-            if (!favoriteBooks.includes({id: id})) favoriteBooks.push({id: id});
-          }
-          console.log(favoriteBooks);
-        }
+      const thisBooks = this;
+      thisBooks.dom.bookList.addEventListener('dblclick', function(event){
+        thisBooks.favoriteBooks(event);
       });
 
-      this.dom.filters.addEventListener('click', function(event){
-        this.checkboxEvent(event);
+      thisBooks.dom.filters.addEventListener('click', function(event){
+        thisBooks.checkboxEvent(event);
       });
 
       this.dom.filters.addEventListener('change', function(){
-        filterBooks();
+        thisBooks.filterBooks();
       });
 
+    }
+
+    favoriteBooks(event){
+      const clickedImage = event.target.offsetParent;
+
+      if(clickedImage.classList.contains(names.bookImage)){
+        const id = clickedImage.getAttribute(names.dataId);
+        if(clickedImage.classList.contains(names.favorite)){
+          clickedImage.classList.remove(names.favorite);
+          favoriteBooks.splice(favoriteBooks.indexOf(id), 1);
+        } else {
+          clickedImage.classList.add(names.favorite);
+          if (!favoriteBooks.includes({id: id})) favoriteBooks.push({id: id});
+        }
+      }
     }
 
     filterBooks(){
